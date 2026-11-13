@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EasyPDF Tools | Free Online PDF Tools</title>
+<meta name="description" content="Simple free PDF tools to convert images, merge PDFs and split PDF pages in your browser.">
+<style>
+:root{--purple:#6258e8;--ink:#17213b;--muted:#68738b;--bg:#f7f8fc;--line:#e8eaf2}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,Arial,sans-serif;color:var(--ink)}
+header{background:white;border-bottom:1px solid var(--line);padding:18px max(5%,calc((100% - 1120px)/2));display:flex;align-items:center;justify-content:space-between}
+.logo{font-weight:850;font-size:23px;letter-spacing:-.8px}.logo b{color:var(--purple)}nav a{color:var(--muted);text-decoration:none;margin-left:22px;font-size:14px}
+.hero{max-width:900px;margin:65px auto 38px;text-align:center;padding:0 20px}.pill{display:inline-block;background:#eeedff;color:var(--purple);padding:8px 13px;border-radius:30px;font-size:12px;font-weight:700}
+h1{font-size:clamp(34px,6vw,57px);line-height:1.08;letter-spacing:-2px;margin:19px 0 14px}.hero p{font-size:17px;color:var(--muted);line-height:1.65;margin:0 auto;max-width:650px}
+main{max-width:1120px;margin:0 auto;padding:0 20px 60px}.section-head{text-align:center;margin:38px 0 23px}.section-head h2{font-size:25px;margin:0 0 8px}.section-head p{color:var(--muted);margin:0;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:17px}
+.tool{background:white;border:1px solid var(--line);border-radius:17px;padding:22px;box-shadow:0 8px 24px #1d28500a}
+.ico{height:45px;width:45px;border-radius:13px;background:#f0efff;color:var(--purple);display:grid;place-items:center;font-size:22px;font-weight:700}
+.tool h3{font-size:18px;margin:15px 0 7px}.tool p{color:var(--muted);font-size:13px;line-height:1.55;min-height:40px}
+input[type=file]{width:100%;font-size:12px;margin:12px 0}
+button{background:var(--purple);color:white;border:0;border-radius:10px;padding:12px 15px;font-weight:700;width:100%;cursor:pointer}
+button:disabled{opacity:.55;cursor:wait}.status{font-size:12px;color:var(--muted);min-height:18px;margin-top:9px;line-height:1.4}
+.info{margin:24px 0 0;background:#fff;border:1px solid var(--line);padding:17px;border-radius:13px;color:var(--muted);font-size:12px;line-height:1.6}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:25px;border-top:1px solid var(--line);background:#fff}
+@media(max-width:600px){header{padding:16px 20px}nav a{margin-left:10px;font-size:12px}.hero{margin-top:45px}}
+</style></head>
+<body>
+<header><div class="logo">Easy<b>PDF</b> Tools</div><nav><a href="#tools">Tools</a><a href="#about">About</a></nav></header>
+<section class="hero"><span class="pill">FREE ONLINE PDF TOOLS</span><h1>Make PDF work<br>simple and easy.</h1><p>Convert images, combine PDF files and split pages — with simple tools that run in your browser.</p></section>
+<main id="tools"><div class="section-head"><h2>Choose a PDF tool</h2><p>Pick a tool below to get started. No account needed.</p></div>
+<div class="grid">
+<article class="tool"><div class="ico">▧</div><h3>Image to PDF</h3><p>Turn JPG and PNG images into a single PDF document.</p><input id="imgs" type="file" accept="image/png,image/jpeg" multiple><button id="imgBtn">Create PDF</button><div class="status" id="imgMsg"></div></article>
+<article class="tool"><div class="ico">＋</div><h3>Merge PDF</h3><p>Combine two or more PDF files into one document.</p><input id="merge" type="file" accept=".pdf,application/pdf" multiple><button id="mergeBtn">Merge PDFs</button><div class="status" id="mergeMsg"></div></article>
+<article class="tool"><div class="ico">✂</div><h3>Split PDF</h3><p>Extract every page from a PDF as a separate file.</p><input id="split" type="file" accept=".pdf,application/pdf"><button id="splitBtn">Split PDF</button><div class="status" id="splitMsg"></div></article>
+<article class="tool"><div class="ico">⇩</div><h3>Re-save PDF</h3><p>Re-save a PDF file. This basic operation may not reduce its size.</p><input id="save" type="file" accept=".pdf,application/pdf"><button id="saveBtn">Re-save PDF</button><div class="status" id="saveMsg"></div></article>
+</div>
+<div class="info" id="about"><b>Privacy note:</b> These starter tools process files inside your browser; this page does not upload selected documents to a server. Avoid using sensitive documents until you have tested the site and reviewed its code. The PDF library loads from a third-party CDN.</div>
+</main><footer>© <span id="year"></span> EasyPDF Tools. Simple tools for everyday documents.</footer>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script>
+const el=id=>document.getElementById(id);el('year').textContent=new Date().getFullYear();
+function msg(id,s){el(id).textContent=s}
+function saveBlob(bytes,name){const u=URL.createObjectURL(new Blob([bytes],{type:'application/pdf'}));const a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1500)}
+async function task(btnId,msgId,fn){el(btnId).disabled=true;msg(msgId,'Working…');try{await fn()}catch(e){console.error(e);msg(msgId,'Could not process this file. Check the file and try again.')}finally{el(btnId).disabled=false}}
+el('imgBtn').onclick=()=>task('imgBtn','imgMsg',async()=>{const fs=[...el('imgs').files];if(!fs.length)throw 0;const pdf=await PDFLib.PDFDocument.create();for(const f of fs){const b=await f.arrayBuffer();const im=f.type==='image/png'?await pdf.embedPng(b):await pdf.embedJpg(b);const p=pdf.addPage([im.width,im.height]);p.drawImage(im,{x:0,y:0,width:im.width,height:im.height})}saveBlob(await pdf.save(),'images.pdf');msg('imgMsg',`Created PDF from ${fs.length} image(s).`)});
+el('mergeBtn').onclick=()=>task('mergeBtn','mergeMsg',async()=>{const fs=[...el('merge').files];if(fs.length<2)throw 0;const out=await PDFLib.PDFDocument.create();for(const f of fs){const src=await PDFLib.PDFDocument.load(await f.arrayBuffer());(await out.copyPages(src,src.getPageIndices())).forEach(p=>out.addPage(p))}saveBlob(await out.save(),'merged.pdf');msg('mergeMsg',`Merged ${fs.length} PDFs.`)});
+el('splitBtn').onclick=()=>task('splitBtn','splitMsg',async()=>{const f=el('split').files[0];if(!f)throw 0;const src=await PDFLib.PDFDocument.load(await f.arrayBuffer());for(let i=0;i<src.getPageCount();i++){const out=await PDFLib.PDFDocument.create();const [p]=await out.copyPages(src,[i]);out.addPage(p);saveBlob(await out.save(),`page-${i+1}.pdf`);await new Promise(r=>setTimeout(r,200))}msg('splitMsg',`Created ${src.getPageCount()} page PDF(s). Your browser may ask to allow multiple downloads.`)});
+el('saveBtn').onclick=()=>task('saveBtn','saveMsg',async()=>{const f=el('save').files[0];if(!f)throw 0;const doc=await PDFLib.PDFDocument.load(await f.arrayBuffer());saveBlob(await doc.save({useObjectStreams:true}),'resaved.pdf');msg('saveMsg','PDF re-saved. Its size may not become smaller.')});
+</script></body></html>
