@@ -1,48 +1,493 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EasyPDF Tools | Free Online PDF Tools</title>
-<meta name="description" content="Simple free PDF tools to convert images, merge PDFs and split PDF pages in your browser.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>EasyPDF - Free Online PDF Tools</title>
+<meta name="description" content="EasyPDF offers simple free online PDF tools. Convert images to PDF, merge PDF files, split pages and more.">
+<meta name="keywords" content="free PDF tools, image to PDF, merge PDF, split PDF, online PDF tools">
+<meta name="theme-color" content="#635bdf">
+
 <style>
-:root{--purple:#6258e8;--ink:#17213b;--muted:#68738b;--bg:#f7f8fc;--line:#e8eaf2}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,Arial,sans-serif;color:var(--ink)}
-header{background:white;border-bottom:1px solid var(--line);padding:18px max(5%,calc((100% - 1120px)/2));display:flex;align-items:center;justify-content:space-between}
-.logo{font-weight:850;font-size:23px;letter-spacing:-.8px}.logo b{color:var(--purple)}nav a{color:var(--muted);text-decoration:none;margin-left:22px;font-size:14px}
-.hero{max-width:900px;margin:65px auto 38px;text-align:center;padding:0 20px}.pill{display:inline-block;background:#eeedff;color:var(--purple);padding:8px 13px;border-radius:30px;font-size:12px;font-weight:700}
-h1{font-size:clamp(34px,6vw,57px);line-height:1.08;letter-spacing:-2px;margin:19px 0 14px}.hero p{font-size:17px;color:var(--muted);line-height:1.65;margin:0 auto;max-width:650px}
-main{max-width:1120px;margin:0 auto;padding:0 20px 60px}.section-head{text-align:center;margin:38px 0 23px}.section-head h2{font-size:25px;margin:0 0 8px}.section-head p{color:var(--muted);margin:0;font-size:14px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:17px}
-.tool{background:white;border:1px solid var(--line);border-radius:17px;padding:22px;box-shadow:0 8px 24px #1d28500a}
-.ico{height:45px;width:45px;border-radius:13px;background:#f0efff;color:var(--purple);display:grid;place-items:center;font-size:22px;font-weight:700}
-.tool h3{font-size:18px;margin:15px 0 7px}.tool p{color:var(--muted);font-size:13px;line-height:1.55;min-height:40px}
-input[type=file]{width:100%;font-size:12px;margin:12px 0}
-button{background:var(--purple);color:white;border:0;border-radius:10px;padding:12px 15px;font-weight:700;width:100%;cursor:pointer}
-button:disabled{opacity:.55;cursor:wait}.status{font-size:12px;color:var(--muted);min-height:18px;margin-top:9px;line-height:1.4}
-.info{margin:24px 0 0;background:#fff;border:1px solid var(--line);padding:17px;border-radius:13px;color:var(--muted);font-size:12px;line-height:1.6}
-footer{text-align:center;color:var(--muted);font-size:12px;padding:25px;border-top:1px solid var(--line);background:#fff}
-@media(max-width:600px){header{padding:16px 20px}nav a{margin-left:10px;font-size:12px}.hero{margin-top:45px}}
-</style></head>
+:root {
+  --primary: #635bdf;
+  --dark: #191b35;
+  --muted: #73768b;
+  --bg: #f7f8fc;
+  --white: #ffffff;
+  --border: #e9eaf2;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: var(--dark);
+  background: var(--bg);
+}
+header {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.nav {
+  max-width: 1120px;
+  margin: auto;
+  padding: 18px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+.logo span { color: var(--primary); }
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+  margin-left: 22px;
+  font-size: 14px;
+}
+nav a:hover { color: var(--primary); }
+
+.hero {
+  text-align: center;
+  padding: 85px 20px 55px;
+  background: linear-gradient(135deg,#f0efff,#ffffff);
+}
+.pill {
+  display: inline-block;
+  padding: 9px 15px;
+  border-radius: 30px;
+  background: #e9e7ff;
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: bold;
+}
+.hero h1 {
+  font-size: clamp(36px,6vw,62px);
+  line-height: 1.1;
+  letter-spacing: -2px;
+  margin: 22px 0 16px;
+}
+.hero h1 span { color: var(--primary); }
+.hero p {
+  max-width: 650px;
+  margin: auto;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.7;
+}
+.hero-btn {
+  display: inline-block;
+  margin-top: 25px;
+  background: var(--primary);
+  color: white;
+  text-decoration: none;
+  padding: 14px 25px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+main {
+  max-width: 1120px;
+  margin: auto;
+  padding: 35px 20px 65px;
+}
+.section-title {
+  text-align: center;
+  margin: 30px 0;
+}
+.section-title h2 {
+  font-size: 29px;
+  margin-bottom: 9px;
+}
+.section-title p {
+  color: var(--muted);
+  font-size: 14px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(235px,1fr));
+  gap: 20px;
+}
+.tool {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  padding: 24px;
+  box-shadow: 0 7px 25px rgba(30,35,80,.04);
+  transition: transform .2s,box-shadow .2s;
+}
+.tool:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(30,35,80,.09);
+}
+.ico {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: #efeeff;
+  color: var(--primary);
+  font-size: 25px;
+}
+.tool h3 {
+  font-size: 19px;
+  margin: 17px 0 8px;
+}
+.tool p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+  min-height: 42px;
+}
+input[type=file] {
+  width: 100%;
+  font-size: 12px;
+  margin: 12px 0;
+}
+button {
+  width: 100%;
+  padding: 13px;
+  background: var(--primary);
+  color: white;
+  border: 0;
+  border-radius: 9px;
+  font-weight: bold;
+  cursor: pointer;
+}
+button:hover { background: #5048c5; }
+button:disabled { opacity: .55; cursor: wait; }
+.status {
+  min-height: 20px;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+  gap: 18px;
+  margin: 55px 0;
+}
+.feature {
+  text-align: center;
+  padding: 20px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+.feature strong { display: block; margin: 10px 0; }
+.feature p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.content-section {
+  background: white;
+  border: 1px solid var(--border);
+  padding: 28px;
+  border-radius: 16px;
+  margin-top: 25px;
+  line-height: 1.7;
+}
+.content-section h2 { font-size: 23px; }
+.content-section p,.content-section li {
+  color: var(--muted);
+  font-size: 14px;
+}
+.faq-item {
+  padding: 15px 0;
+  border-bottom: 1px solid var(--border);
+}
+.faq-item:last-child { border: 0; }
+.faq-item h3 { font-size: 16px; }
+footer {
+  background: #191b35;
+  color: white;
+  text-align: center;
+  padding: 35px 20px;
+}
+footer p {
+  color: #c3c4d2;
+  font-size: 13px;
+  line-height: 1.8;
+}
+footer a {
+  color: white;
+  text-decoration: none;
+  margin: 0 9px;
+  font-size: 13px;
+}
+@media(max-width:600px) {
+  .nav { padding: 15px; }
+  nav a { margin-left: 10px; font-size: 12px; }
+  .hero { padding: 60px 18px 45px; }
+  .hero h1 { letter-spacing: -1px; }
+  main { padding-left: 15px; padding-right: 15px; }
+}
+</style>
+</head>
+
 <body>
-<header><div class="logo">Easy<b>PDF</b> Tools</div><nav><a href="#tools">Tools</a><a href="#about">About</a></nav></header>
-<section class="hero"><span class="pill">FREE ONLINE PDF TOOLS</span><h1>Make PDF work<br>simple and easy.</h1><p>Convert images, combine PDF files and split pages — with simple tools that run in your browser.</p></section>
-<main id="tools"><div class="section-head"><h2>Choose a PDF tool</h2><p>Pick a tool below to get started. No account needed.</p></div>
-<div class="grid">
-<article class="tool"><div class="ico">▧</div><h3>Image to PDF</h3><p>Turn JPG and PNG images into a single PDF document.</p><input id="imgs" type="file" accept="image/png,image/jpeg" multiple><button id="imgBtn">Create PDF</button><div class="status" id="imgMsg"></div></article>
-<article class="tool"><div class="ico">＋</div><h3>Merge PDF</h3><p>Combine two or more PDF files into one document.</p><input id="merge" type="file" accept=".pdf,application/pdf" multiple><button id="mergeBtn">Merge PDFs</button><div class="status" id="mergeMsg"></div></article>
-<article class="tool"><div class="ico">✂</div><h3>Split PDF</h3><p>Extract every page from a PDF as a separate file.</p><input id="split" type="file" accept=".pdf,application/pdf"><button id="splitBtn">Split PDF</button><div class="status" id="splitMsg"></div></article>
-<article class="tool"><div class="ico">⇩</div><h3>Re-save PDF</h3><p>Re-save a PDF file. This basic operation may not reduce its size.</p><input id="save" type="file" accept=".pdf,application/pdf"><button id="saveBtn">Re-save PDF</button><div class="status" id="saveMsg"></div></article>
-</div>
-<div class="info" id="about"><b>Privacy note:</b> These starter tools process files inside your browser; this page does not upload selected documents to a server. Avoid using sensitive documents until you have tested the site and reviewed its code. The PDF library loads from a third-party CDN.</div>
-</main><footer>© <span id="year"></span> EasyPDF Tools. Simple tools for everyday documents.</footer>
+
+<header>
+  <div class="nav">
+    <div class="logo">Easy<span>PDF</span></div>
+    <nav>
+      <a href="#tools">Tools</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <span class="pill">FREE ONLINE PDF TOOLS</span>
+  <h1>Your PDF tasks,<br><span>made simple.</span></h1>
+  <p>
+    Convert images, merge documents and split PDF pages
+    with easy-to-use online tools. No account required.
+  </p>
+  <a class="hero-btn" href="#tools">Explore PDF Tools ↓</a>
+</section>
+
+<main>
+
+<section id="tools">
+  <div class="section-title">
+    <h2>Choose Your PDF Tool</h2>
+    <p>Simple tools for your everyday document needs.</p>
+  </div>
+
+  <div class="grid">
+
+    <article class="tool">
+      <div class="ico">▧</div>
+      <h3>Image to PDF</h3>
+      <p>Convert JPG and PNG images into a single PDF document.</p>
+      <input id="imgs" type="file" accept="image/png,image/jpeg" multiple>
+      <button id="imgBtn">Create PDF</button>
+      <div class="status" id="imgMsg"></div>
+    </article>
+
+    <article class="tool">
+      <div class="ico">＋</div>
+      <h3>Merge PDF</h3>
+      <p>Combine two or more PDF files into one document.</p>
+      <input id="merge" type="file" accept=".pdf,application/pdf" multiple>
+      <button id="mergeBtn">Merge PDFs</button>
+      <div class="status" id="mergeMsg"></div>
+    </article>
+
+    <article class="tool">
+      <div class="ico">✂</div>
+      <h3>Split PDF</h3>
+      <p>Extract every page from a PDF as a separate file.</p>
+      <input id="split" type="file" accept=".pdf,application/pdf">
+      <button id="splitBtn">Split PDF</button>
+      <div class="status" id="splitMsg"></div>
+    </article>
+
+    <article class="tool">
+      <div class="ico">⇩</div>
+      <h3>Re-save PDF</h3>
+      <p>Re-save a PDF document. This operation may not reduce file size.</p>
+      <input id="save" type="file" accept=".pdf,application/pdf">
+      <button id="saveBtn">Re-save PDF</button>
+      <div class="status" id="saveMsg"></div>
+    </article>
+
+  </div>
+</section>
+
+<section class="features">
+  <div class="feature">
+    <div class="ico" style="margin:auto">⚡</div>
+    <strong>Simple to Use</strong>
+    <p>Easy tools with straightforward steps.</p>
+  </div>
+  <div class="feature">
+    <div class="ico" style="margin:auto">🔒</div>
+    <strong>Browser Processing</strong>
+    <p>These tools process selected files in your browser.</p>
+  </div>
+  <div class="feature">
+    <div class="ico" style="margin:auto">✓</div>
+    <strong>Free to Use</strong>
+    <p>Use the available tools without creating an account.</p>
+  </div>
+</section>
+
+<section class="content-section" id="about">
+  <h2>About EasyPDF</h2>
+  <p>
+    EasyPDF is a simple online PDF tools website designed to help
+    people with everyday document tasks. You can convert images
+    into PDF files, combine PDF documents, extract pages and
+    re-save PDF files.
+  </p>
+  <p>
+    Our goal is to make common document tasks easier and more
+    accessible. We aim to keep improving the tools and adding
+    useful features.
+  </p>
+</section>
+
+<section class="content-section" id="faq">
+  <h2>Frequently Asked Questions</h2>
+
+  <div class="faq-item">
+    <h3>Are EasyPDF tools free?</h3>
+    <p>Yes. The tools currently available on EasyPDF can be used free of charge.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Do I need to create an account?</h3>
+    <p>No account is currently required to use the available tools.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Are my files uploaded to EasyPDF?</h3>
+    <p>
+      The current tools process selected files in your browser.
+      The PDF library is loaded from a third-party content delivery
+      network. This does not mean that every possible browser,
+      extension or network environment is guaranteed to be private.
+    </p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Does Re-save PDF compress my file?</h3>
+    <p>
+      No. Re-saving a PDF does not guarantee a smaller file size.
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="logo">Easy<span>PDF</span></div>
+  <p>Simple tools for everyday documents.</p>
+  <p>
+    <a href="#tools">PDF Tools</a>
+    <a href="#about">About</a>
+    <a href="#faq">FAQ</a>
+  </p>
+  <p>© <span id="year"></span> EasyPDF. All rights reserved.</p>
+</footer>
+
 <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+
 <script>
-const el=id=>document.getElementById(id);el('year').textContent=new Date().getFullYear();
-function msg(id,s){el(id).textContent=s}
-function saveBlob(bytes,name){const u=URL.createObjectURL(new Blob([bytes],{type:'application/pdf'}));const a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1500)}
-async function task(btnId,msgId,fn){el(btnId).disabled=true;msg(msgId,'Working…');try{await fn()}catch(e){console.error(e);msg(msgId,'Could not process this file. Check the file and try again.')}finally{el(btnId).disabled=false}}
-el('imgBtn').onclick=()=>task('imgBtn','imgMsg',async()=>{const fs=[...el('imgs').files];if(!fs.length)throw 0;const pdf=await PDFLib.PDFDocument.create();for(const f of fs){const b=await f.arrayBuffer();const im=f.type==='image/png'?await pdf.embedPng(b):await pdf.embedJpg(b);const p=pdf.addPage([im.width,im.height]);p.drawImage(im,{x:0,y:0,width:im.width,height:im.height})}saveBlob(await pdf.save(),'images.pdf');msg('imgMsg',`Created PDF from ${fs.length} image(s).`)});
-el('mergeBtn').onclick=()=>task('mergeBtn','mergeMsg',async()=>{const fs=[...el('merge').files];if(fs.length<2)throw 0;const out=await PDFLib.PDFDocument.create();for(const f of fs){const src=await PDFLib.PDFDocument.load(await f.arrayBuffer());(await out.copyPages(src,src.getPageIndices())).forEach(p=>out.addPage(p))}saveBlob(await out.save(),'merged.pdf');msg('mergeMsg',`Merged ${fs.length} PDFs.`)});
-el('splitBtn').onclick=()=>task('splitBtn','splitMsg',async()=>{const f=el('split').files[0];if(!f)throw 0;const src=await PDFLib.PDFDocument.load(await f.arrayBuffer());for(let i=0;i<src.getPageCount();i++){const out=await PDFLib.PDFDocument.create();const [p]=await out.copyPages(src,[i]);out.addPage(p);saveBlob(await out.save(),`page-${i+1}.pdf`);await new Promise(r=>setTimeout(r,200))}msg('splitMsg',`Created ${src.getPageCount()} page PDF(s). Your browser may ask to allow multiple downloads.`)});
-el('saveBtn').onclick=()=>task('saveBtn','saveMsg',async()=>{const f=el('save').files[0];if(!f)throw 0;const doc=await PDFLib.PDFDocument.load(await f.arrayBuffer());saveBlob(await doc.save({useObjectStreams:true}),'resaved.pdf');msg('saveMsg','PDF re-saved. Its size may not become smaller.')});
-</script></body></html>
+const el = id => document.getElementById(id);
+el('year').textContent = new Date().getFullYear();
+
+function msg(id, text) {
+  el(id).textContent = text;
+}
+
+function saveBlob(bytes, name) {
+  const url = URL.createObjectURL(
+    new Blob([bytes], {type: 'application/pdf'})
+  );
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = name;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1500);
+}
+
+async function task(btnId, msgId, fn) {
+  el(btnId).disabled = true;
+  msg(msgId, 'Working...');
+  try {
+    await fn();
+  } catch (e) {
+    console.error(e);
+    msg(msgId, 'Could not process this file. Check the file and try again.');
+  } finally {
+    el(btnId).disabled = false;
+  }
+}
+
+el('imgBtn').onclick = () => task('imgBtn', 'imgMsg', async () => {
+  const files = [...el('imgs').files];
+  if (!files.length) throw new Error('Choose an image first.');
+
+  const pdf = await PDFLib.PDFDocument.create();
+
+  for (const file of files) {
+    const bytes = await file.arrayBuffer();
+    const image = file.type === 'image/png'
+      ? await pdf.embedPng(bytes)
+      : await pdf.embedJpg(bytes);
+
+    const page = pdf.addPage([image.width, image.height]);
+    page.drawImage(image, {
+      x: 0, y: 0,
+      width: image.width,
+      height: image.height
+    });
+  }
+
+  saveBlob(await pdf.save(), 'images.pdf');
+  msg('imgMsg', `Created PDF from ${files.length} image(s).`);
+});
+
+el('mergeBtn').onclick = () => task('mergeBtn', 'mergeMsg', async () => {
+  const files = [...el('merge').files];
+  if (files.length < 2) throw new Error('Choose at least two PDFs.');
+
+  const output = await PDFLib.PDFDocument.create();
+
+  for (const file of files) {
+    const source = await PDFLib.PDFDocument.load(await file.arrayBuffer());
+    const pages = await output.copyPages(source, source.getPageIndices());
+    pages.forEach(page => output.addPage(page));
+  }
+
+  saveBlob(await output.save(), 'merged.pdf');
+  msg('mergeMsg', `Merged ${files.length} PDFs.`);
+});
+
+el('splitBtn').onclick = () => task('splitBtn', 'splitMsg', async () => {
+  const file = el('split').files[0];
+  if (!file) throw new Error('Choose a PDF first.');
+
+  const source = await PDFLib.PDFDocument.load(await file.arrayBuffer());
+
+  for (let i = 0; i < source.getPageCount(); i++) {
+    const output = await PDFLib.PDFDocument.create();
+    const [page] = await output.copyPages(source, [i]);
+    output.addPage(page);
+
+    saveBlob(await output.save(), `page-${i + 1}.pdf`);
+    await new Promise(resolve => setTimeout(resolve, 200));
+  }
+
+  msg('splitMsg', `Created ${source.getPageCount()} PDF page(s). Your browser may ask permission for multiple downloads.`);
+});
+
+el('saveBtn').onclick = () => task('saveBtn', 'saveMsg', async () => {
+  const file = el('save').files[0];
+  if (!file) throw new Error('Choose a PDF first.');
+
+  const document = await PDFLib.PDFDocument.load(await file.arrayBuffer());
+  saveBlob(await document.save({useObjectStreams: true}), 'resaved.pdf');
+
+  msg('saveMsg', 'PDF re-saved. Its size may not become smaller.');
+});
+</script>
+
+</body>
+</html>
